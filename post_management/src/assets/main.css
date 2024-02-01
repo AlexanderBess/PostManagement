@@ -1,0 +1,39 @@
+@import './base.css';
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #424242;
+  color: rgb(206, 203, 203);
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button.approve {
+  background-color: green;
+}
+
+button.danger {
+  background-color: #8d0404;
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+  }
+}
