@@ -4,11 +4,14 @@
         <p>{{ post.body }}</p>
         <div class="post__footer">
             <div class="post__buttons">
-                <button class="approve" @click="changeVisability">{{ isShowEditor ? 'Cancel' : 'Hide' }}</button>
+                <button class="approve" @click="changeVisability">{{ isShowEditor ? 'Hide' : 'Open editor' }}</button>
                 <button class="danger" @click="deletePost">Delete</button>
             </div>
             <div class="post__editor" :class="{ 'post__editor_active': isShowEditor }">
-                <input v-model="title" :key="post.id">
+                <div class="editor__title">
+                    <label>Title:</label>
+                    <input v-model="title" :key="post.id">
+                </div>
                 <button class="active" @click="editPost">Save</button>
             </div>
         </div>
@@ -31,7 +34,6 @@ const store = usePostsStore()
  */
 const deletePost = async() => {
     await store.deletePost(props.post.id,)
-    await store.getAllPosts()
 }
 
 /**
@@ -44,7 +46,6 @@ const editPost = async() => {
         id: props.post.id,
         title: title.value
     })
-    await store.getAllPosts()
 }
 
 /**
@@ -93,5 +94,11 @@ const changeVisability = () => {
     margin-top: 20px;
     height: auto;
     opacity: 1;
+}
+
+.editor__title {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
 }
 </style>

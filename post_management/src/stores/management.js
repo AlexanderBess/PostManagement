@@ -35,28 +35,25 @@ export const usePostsStore = defineStore('posts', {
 				headers: {
 					'Content-type': 'application/json; charset=UTF-8',
 				},
-			})
+			}).then(() => this.getAllPosts());
 		},
 
 		/**
 		 * Edit a post using the provided data.
 		 *
 		 * @param {Object} data - the data for editing the post
-		 * @return {Promise} a promise that resolves to the edited post JSON
+		 * @return {void}
 		 */
 		async editPost(data) {
 			await fetch(`https://jsonplaceholder.typicode.com/posts/${ data.id }`, {
-				method: 'PUT',
+				method: 'PATCH',
 				body: JSON.stringify({
-					...data,
-					userId: 1,
+					title: data.title
 				}),
 				headers: {
 					'Content-type': 'application/json; charset=UTF-8',
 				},
-			})
-			.then((response) => response.json())
-			.then((json) => console.log(json));
+			}).then(() => this.getAllPosts());
 		},
 
 		/**
@@ -66,7 +63,7 @@ export const usePostsStore = defineStore('posts', {
 		 * @return {void} 
 		 */
 		async deletePost(id) {
-			await fetch(`https://jsonplaceholder.typicode.com/posts/${ id }`, { method: 'DELETE', });
+			await fetch(`https://jsonplaceholder.typicode.com/posts/${ id }`, { method: 'DELETE', }).then(() => this.getAllPosts());
 		}
 	},
 })

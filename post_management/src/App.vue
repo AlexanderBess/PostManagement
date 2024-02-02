@@ -15,7 +15,7 @@
             <div v-show="isShowPostCreater" class="post__creater">
                 <label>Title:</label>
                 <input v-model="title">
-                <button @click="createPost">Create post</button>
+                <button class="approve" @click="createPost">Create post</button>
             </div>
         </div>
     </main>
@@ -31,13 +31,22 @@ const isShowPostCreater = ref(false)
 const title = ref('')
 const posts = computed(() => store.getPosts)
 
+/**
+ * Function to toggle the visibility of the post creator.
+ *
+ * @return {void}
+ */
 const showPostCreater = () => {
     isShowPostCreater.value = !isShowPostCreater.value
 }
 
+/**
+ * Creates a post using the title value and hides the post creator.
+ *
+ * @return {void}
+ */
 const createPost = async () => {
     await store.createPost({ title: title.value })
-    await store.getAllPosts()
     isShowPostCreater.value = false
 }
 
